@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ChangeEvent, MouseEvent} from 'react';
 import './App.css';
 
 /**
@@ -15,6 +15,7 @@ interface IAppOwnProps {
 
 const  App: React.FC<IAppOwnProps> = ({userName, userType}): JSX.Element => {
     const [time, setTime] = useState(()=> new Date(Date.now()))
+    const [message, setMessage] = useState<string>('')
     useEffect(()=> {
         const timer = setInterval(() => {
             setTime(new Date(Date.now()))
@@ -24,9 +25,9 @@ const  App: React.FC<IAppOwnProps> = ({userName, userType}): JSX.Element => {
         }
     }, )
 
-    setInterval(()=> {
-        setTime(new Date(Date.now()))
-    }, 1000)
+    const handleTextChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        setMessage(event.target.value)
+    }
 
   return (
     <div className="App">
@@ -34,6 +35,12 @@ const  App: React.FC<IAppOwnProps> = ({userName, userType}): JSX.Element => {
      <p>
          Current Time is: {time.toUTCString()}
      </p>
+
+        <input type="text"
+            value={message}
+               onChange={handleTextChange}
+        />
+        <p> your message is : { message || '' }</p>
     </div>
   );
 }
