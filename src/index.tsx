@@ -1,29 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import {UserList} from "./component/UserList";
+import { UserList } from './components/UserList';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux';
 
+// @ts-ignore
 ReactDOM.render(
-    <BrowserRouter>
-        <Switch>
-            <Route
-            exact
-            path='/'
-            render={(props)=> <App userName='John' userType='admin' {...props}  />}/>
-
-        </Switch>
-        <Switch>
-            <Route
-                exact
-                path='/userlist'
-                render={(props)=> <UserList {...props}/>} />
-        </Switch>
-    </BrowserRouter>,
-
-  document.getElementById('root')
+    <Provider store={store}>
+        <BrowserRouter>
+            <Switch>
+                <Route
+                    exact
+                    path='/'
+                    render={(props) => <App userType='admin' userName='h4x0r' {...props} />}
+                />
+            </Switch>
+            <Switch>
+                <Route
+                    exact
+                    path='/userlist'
+                    render={(props) => <UserList {...props} />}
+                />
+            </Switch>
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
