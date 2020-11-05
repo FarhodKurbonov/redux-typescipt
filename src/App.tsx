@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
-function App() {
+/**
+ * Interface naming convention
+ * I + ComponentName + DescriptiveUsage = Interface Name
+ * I + App + OwnProps = IAppOwnProps
+ */
+
+interface IAppOwnProps {
+    userName: string | undefined;
+    userType: 'admin' | 'moderator' | 'user' | 'guest';
+
+}
+
+const  App: React.FC<IAppOwnProps> = ({userName, userType}): JSX.Element => {
+    const [time, setTime] = useState(()=> new Date(Date.now()))
+    useEffect(()=> {
+        const timer = setInterval(() => {
+            setTime(new Date(Date.now()))
+        }, 1000)
+        return ()=> {
+            clearInterval(timer)
+        }
+    }, )
+
+    setInterval(()=> {
+        setTime(new Date(Date.now()))
+    }, 1000)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     Hi Mr. {userName? userName: 'Mysterious Entity'}. You are {userType? userType: 'sorry we do not know you' }
+     <p>
+         Current Time is: {time.toUTCString()}
+     </p>
     </div>
   );
 }
