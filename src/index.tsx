@@ -3,11 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {UserList} from "./component/UserList";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App userName='John' userType='admin'  />
-  </React.StrictMode>,
+    <BrowserRouter>
+        <Switch>
+            <Route
+            exact
+            path='/'
+            render={(props)=> <App userName='John' userType='admin' {...props}  />}/>
+
+        </Switch>
+        <Switch>
+            <Route
+                exact
+                path='/userlist'
+                render={(props)=> <UserList {...props}/>} />
+        </Switch>
+    </BrowserRouter>,
+
   document.getElementById('root')
 );
 
