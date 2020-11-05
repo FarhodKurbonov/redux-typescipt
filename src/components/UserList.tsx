@@ -34,10 +34,13 @@ export const UserList: React.FC<IUserList> = ({user= undefined, getFriendList}):
 
     useEffect(() => {
         if( fetchFriends ) {
-            if (getFriendList) getFriendList('https://jsonplaceholder.typicode.com/users')
+            if (getFriendList) {
+                getFriendList('https://jsonplaceholder.typicode.com/users')
+            }
             setFetchFriends(false);
         }
-    }, [fetchFriends]);
+
+    }, );
 
     let friendListJsx: JSX.Element | undefined = undefined;
 
